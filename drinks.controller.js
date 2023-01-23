@@ -2,7 +2,7 @@ const Drink = require("./Drink.model");
 
 module.exports.drinkController = {
   getAllDrinks: (req, res) => {
-    Drink.find({}, {name: 1, price: 1})
+    Drink.find({}, {name: true, price: true})
     .then((drinks) => {
       res.json(drinks)
     });
@@ -54,7 +54,7 @@ module.exports.drinkController = {
   },
 
   patchDrink: (req, res) => {
-    Drink.updateOne({
+    Drink.findByIdAndUpdate(req.params.id, {
       name: req.body.name,
       price: req.body.price,
       inStock: req.body.inStock,
